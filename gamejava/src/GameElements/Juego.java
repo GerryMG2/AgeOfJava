@@ -87,6 +87,10 @@ public class Juego {
     public void start() {
         fase = 1;
     }
+    
+    public void ReStart(){
+        
+    }
 
     public void VerifyConst(CentroDeMando cm) {
         for (OrdenesConstr or : cm.constrEntre) {
