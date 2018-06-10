@@ -11,15 +11,19 @@ package GameElements;
  */
 public class Vehiculo {
     public Materiales mat;
+    public String name;
     public int TiempoEspera;
     public int vida;
+    public int vidatotal; 
     public int fasetomake;
     public int cantidadMateriales;
-    public Vehiculo(Materiales mat, int TiempoEspera, int vida,int materiales) {
+    public Vehiculo(Materiales mat, int TiempoEspera, int vida,int materiales,String name) {
         this.mat = mat;
         this.TiempoEspera = TiempoEspera;
         this.vida = vida;
+        this.vidatotal = vida;
         this.cantidadMateriales = materiales;
+        this.name = name;
     }
     
     public void makeOperations(CentroDeMando cm){
@@ -40,5 +44,8 @@ public class Vehiculo {
     
     public void getDamage(int ata){
         vida -= ata;
+    }
+    public String VidaShow(){
+        return vida + "/" + vidatotal;
     }
 }

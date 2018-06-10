@@ -10,5 +10,5 @@ package GameElements;
  * @author gerar
  */
 public enum TipoEdificacion {
-    Recolectora,Entrenadora,Vehicular
+    Recolectora,Entrenadora,Vehicular,Vehicular2
 }

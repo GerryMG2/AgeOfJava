@@ -10,5 +10,5 @@ package GameElements;
  * @author gerar
  */
 public enum MiliciaEstado {
-    ataque,enCaminoAtaque,enCaminoDefensa,Defensa,esperando;
+    ataque,enCaminoAtaque,esperando;
 }
