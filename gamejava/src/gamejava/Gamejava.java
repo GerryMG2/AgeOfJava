@@ -5,6 +5,8 @@
  */
 package gamejava;
 
+import GameElements.Juego;
+
 /**
  *
  * @author gerar
@@ -16,7 +18,8 @@ public class Gamejava {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int x = 0;
+        Juego game = Juego.ini();
+        game.start();
         
     }
     
