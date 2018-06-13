@@ -94,6 +94,11 @@ public class Juego {
             //nada
         }
         this.VerifyConst(cm1);
+        this.VerifyAtack(cm1, cm2, fase);
+        this.Menu(cm1);
+        int opcion;
+        opcion = Reader.consola.nextInt();
+
     }
 
     public void VerifyAtack(CentroDeMando cm1, CentroDeMando cm2, int fase) {
@@ -419,6 +424,81 @@ public class Juego {
         cm.getMaterials();
         System.out.println("1.Elementos(Vehiculos, milicias,edificaciones)"
                 + "\n2.Atacar 3.Defender 4.Construir 5.Mejorar");
+    }
+
+    public void subMenu1_1(int opcion, CentroDeMando cm, CentroDeMando cm2, int fase) {
+        int elec = 0;
+        switch (opcion) {
+            case 1:
+                this.subMenu1(cm);
+                elec = Reader.consola.nextInt();
+                switch (elec) {
+                    case 1:
+                        System.out.println("Vehiculos Livianos");
+                        for (Vehiculo vehi : cm.vehiculos) {
+                            System.out.println(vehi.name + " :" + vehi.VidaShow());
+                        }
+                        System.out.println("Vehiculos Camiones");
+                        for (Vehiculo vehi : cm.vehiculos2) {
+                            System.out.println(vehi.name + " :" + vehi.VidaShow());
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Milicias: ");
+                        for (Milicia ml : cm.milicias) {
+                            System.out.println(ml.name + " " + ml.VidaShow());
+                        }
+                        break;
+                    case 3:
+                        System.out.println("1.Entrenadoras 2.Vehicular1 3.Vehicular2 4.Recolectora1 5.Recolectora2 6.Recolectora3");
+                        int aux = Reader.consola.nextInt();
+                        switch (aux) {
+                            case 1:
+                                for(Edificacion edi: cm.construccionesEntrendoras){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+                            case 2:
+                                for(Edificacion edi: cm.construccionesVehiculos){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+                            case 3:
+                                for(Edificacion edi: cm.construccionesVehiculos2){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+                            case 4:
+                                for(Edificacion edi: cm.construccionesRecolectora1){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+                            case 5:
+                                for(Edificacion edi: cm.construccionesRecolectora2){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+                            case 6:
+                                for(Edificacion edi: cm.construccionesRecolectora3){
+                                    System.out.println(edi.name +" " + edi.VidaShow());
+                                }
+                                break;
+
+                        }
+                }
+                break;
+            case 2:
+                this.subMenu2(cm);
+                elec = Reader.consola.nextInt();
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+
+                break;
+        }
     }
 
     public void subMenu1(CentroDeMando cm) {
