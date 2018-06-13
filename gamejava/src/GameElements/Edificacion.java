@@ -25,6 +25,7 @@ public class Edificacion {
     public int vidatotal;
     public int faseToMake;
     ArrayList<OrdenesConstr> fase;
+    
 
     public Edificacion(int oro, int gas, int metal, int tiempoFabricacion, int vida, Materiales material, TipoEdificacion tipo, TipoRaza raza, int material2, String name, TipoVehiculo tip) {
         this.vida = vida;
@@ -112,13 +113,29 @@ public class Edificacion {
     public void makeProcess(CentroDeMando cm) {
         switch (this.material) {
             case oro:
-                cm.oro += cantidadMateriales;
+                if(cm.oro + cantidadMateriales <= cm.totaloro ){
+                    cm.oro += cantidadMateriales;
+                }else{
+                    cm.oro = cm.totaloro;
+                }
+                
                 break;
             case combustible:
-                cm.combustible += cantidadMateriales;
+                if(cm.combustible + cantidadMateriales <= cm.totalcombustible ){
+                    cm.combustible += cantidadMateriales;
+                }else{
+                    cm.combustible = cm.totalcombustible;
+                }
+                
                 break;
             case metal:
-                cm.metal += cantidadMateriales;
+                if(cm.metal + cantidadMateriales <= cm.totalmetal ){
+                    cm.metal += cantidadMateriales;
+                }else{
+                    cm.metal = cm.totalmetal;
+                }
+                
+               
                 break;
         }
         faseToMake += tiempoFabricacion;

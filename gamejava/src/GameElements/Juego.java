@@ -86,10 +86,209 @@ public class Juego {
 
     public void start() {
         fase = 1;
+
     }
-    
-    public void ReStart(){
-        
+
+    public void Turno(CentroDeMando cm1, CentroDeMando cm2, int fase) {
+        while (!this.Matchpassword(cm1)) {
+            //nada
+        }
+        this.VerifyConst(cm1);
+    }
+
+    public void VerifyAtack(CentroDeMando cm1, CentroDeMando cm2, int fase) {
+        for (Milicia ml : cm1.milicias) {
+            if (ml.fasetomake == fase) {
+                switch (ml.atacando[0]) {
+                    case 0:
+                        ml.makeOperations(cm1, cm2);
+                        break;
+                    case 1:
+                        int aux = 0;
+                        boolean kill = false;
+                        for (Edificacion edi : cm2.construccionesEntrendoras) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesEntrendoras.remove(aux);
+                        }
+
+                        break;
+                    case 2:
+                        aux = 0;
+                        kill = false;
+                        for (Edificacion edi : cm2.construccionesVehiculos) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesVehiculos.remove(aux);
+                        }
+                        break;
+                    case 3:
+                        aux = 0;
+                        kill = false;
+                        for (Edificacion edi : cm2.construccionesVehiculos2) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesVehiculos2.remove(aux);
+                        }
+                        break;
+                    case 4:
+                        aux = 0;
+                        kill = false;
+                        for (Edificacion edi : cm2.construccionesRecolectora1) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesRecolectora1.remove(aux);
+                        }
+                        break;
+                    case 5:
+                        aux = 0;
+                        kill = false;
+                        for (Edificacion edi : cm2.construccionesRecolectora2) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesRecolectora2.remove(aux);
+                        }
+                        break;
+                    case 6:
+                        aux = 0;
+                        kill = false;
+                        for (Edificacion edi : cm2.construccionesRecolectora3) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.construccionesRecolectora3.remove(aux);
+                        }
+                        break;
+                    case 7:
+                        aux = 0;
+                        kill = false;
+                        for (Vehiculo edi : cm2.vehiculos) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.vehiculos.remove(aux);
+                        }
+                        break;
+                    case 8:
+                        aux = 0;
+                        kill = false;
+                        for (Vehiculo edi : cm2.vehiculos2) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.vehiculos2.remove(aux);
+                        }
+                        break;
+                    case 9:
+                        aux = 0;
+                        kill = false;
+                        for (Milicia edi : cm2.milicias) {
+                            if (edi.hashCode() == ml.atacando[1]) {
+                                ml.makeOperations(cm1, edi);
+                                if (edi.vida <= 0) {
+                                    ml.estado = MiliciaEstado.esperando;
+                                    kill = true;
+                                }
+
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (kill) {
+                            cm2.milicias.remove(aux);
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    public boolean Matchpassword(CentroDeMando cm) {
+        System.out.println("Ingrese su contrasennia:");
+        String pass = Reader.consola.next();
+        return pass.equals(cm.getPass());
+
+    }
+
+    public void ReStart() {
+
     }
 
     public void VerifyConst(CentroDeMando cm) {
@@ -207,4 +406,102 @@ public class Juego {
 
     }
 
+    public boolean isLive(CentroDeMando cm) {
+        if (cm.vida <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void Menu(CentroDeMando cm) {
+        System.out.println("Centro De Mando: " + cm.VidaShow());
+        cm.getMaterials();
+        System.out.println("1.Elementos(Vehiculos, milicias,edificaciones)"
+                + "\n2.Atacar 3.Defender 4.Construir 5.Mejorar");
+    }
+
+    public void subMenu1(CentroDeMando cm) {
+        System.out.println("1.Vehiculos 2.Milicias 3. Edificaciones");
+    }
+
+    public void subMenu2(CentroDeMando cm1) {
+        for (Milicia ml : cm1.milicias) {
+            System.out.println(ml.name + " " + ml.VidaShow() + " " + ml.estado + " " + ml.territorio);
+        }
+    }
+
+    public void subMenu3(CentroDeMando cm, CentroDeMando cm2) {
+        int aux = 0;
+        for (Milicia ml : cm2.milicias) {
+            if (ml.estado == MiliciaEstado.ataque) {
+                try {
+                    switch (ml.atacando[0]) {
+                        case 1:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesEntrendoras.get(ml.atacando[1]).name + " Base Entrenadora" + " con vida " + cm.construccionesEntrendoras.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 2:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesVehiculos.get(ml.atacando[1]).name + " Base Constructora de Vehiculos tipo liviano" + " con vida " + cm.construccionesVehiculos.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 3:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesVehiculos2.get(ml.atacando[1]).name + " Base Constructora de Vehiculos tipo camion" + " con vida " + cm.construccionesVehiculos2.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 4:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesRecolectora1.get(ml.atacando[1]).name + " Base Recolectora de material 1" + " con vida " + cm.construccionesRecolectora1.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 5:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesRecolectora2.get(ml.atacando[1]).name + " Base Recolectora de material 2" + " con vida " + cm.construccionesRecolectora2.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 6:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.construccionesRecolectora3.get(ml.atacando[1]).name + " Base Recolectora de material 3" + " con vida " + cm.construccionesRecolectora3.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 7:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.vehiculos.get(ml.atacando[1]).name + " Vehiculo liviano" + " con vida " + cm.vehiculos.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 8:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.vehiculos2.get(ml.atacando[1]).name + " Vehiculo tipo camion" + " con vida " + cm.vehiculos2.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                        case 9:
+                            System.out.println(aux + 1 + " " + ml.name + "Esta atancando a " + cm.milicias.get(ml.atacando[1]).name + " Milicia" + " con vida " + cm.milicias.get(ml.atacando[1]).VidaShow());
+                            aux++;
+                            break;
+                    }
+                } catch (Exception error2) {
+
+                }
+
+            }
+        }
+    }
+
+    public void subMenu4(CentroDeMando cm) {
+        System.out.println("1.Con el centro de mano(Edificaciones Recolectoras, Entrenadoras y de Vehiculos)");
+        System.out.println("Ten en cuenta que si te destruyen la edificacion donde mandas a construir el objeto no se construira");
+        if (!cm.construccionesEntrendoras.isEmpty()) {
+            System.out.println("2.Con Edificacion Entrenadora");
+
+        }
+
+        if (!cm.construccionesVehiculos.isEmpty()) {
+            System.out.println("3. Con Edificacion Vehicular tipo liviano");
+        }
+
+        if (!cm.construccionesVehiculos2.isEmpty()) {
+            System.out.println("4. Con Edificacion Vehicular tipo camion");
+        }
+    }
+
+    public void subMenu5(CentroDeMando cm) {
+        cm.getMaterials();
+        int gasto = (int) (0.25 * (cm.totaloro + cm.totalcombustible + cm.totalmetal)) / 3;
+        System.out.println("Costo: " + gasto + " de cada Material");
+    }
 }

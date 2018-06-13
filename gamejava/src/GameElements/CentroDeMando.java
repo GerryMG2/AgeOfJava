@@ -18,6 +18,7 @@ public class CentroDeMando {
     public int combustible;
     public int metal;
     public int vida;
+    public int vidatotal;
     public TipoRaza type;
     public int costoConsEntre[];
     public int costoConstVehi[];
@@ -41,6 +42,25 @@ public class CentroDeMando {
     ArrayList<Vehiculo> vehiculos;
     ArrayList<Vehiculo> vehiculos2;
     ArrayList<Milicia> milicias;
+    public int level = 0;
+    public int totaloro = 10000;
+    public int totalcombustible = 5500;
+    public int totalmetal = 3300;
+    
+    public void getMaterials() {
+        switch (this.type) {
+            case Constructor:
+                System.out.println("Oro: " + this.oro + " Combustible: " + this.combustible + " Hierro: " + this.metal);
+                break;
+            case Tanque:
+                System.out.println("Dinero: " + this.oro + " Gasolina Spectrum: " + this.combustible + " Cobre: " + this.metal);
+                break;
+            case Atacante:
+                System.out.println("Plata: " + this.oro + " Combustible: " + this.combustible + " Acero: " + this.metal);
+                break;
+        }
+        
+    }
     
     public CentroDeMando(String password, int oro, int combustible, int metal, int vida, TipoRaza type) {
         this.password = password;
@@ -48,6 +68,7 @@ public class CentroDeMando {
         this.combustible = combustible;
         this.metal = metal;
         this.vida = vida;
+        this.vidatotal = vida;
         this.type = type;
         construccionesEntrendoras = new ArrayList<>();
         construccionesVehiculos = new ArrayList<>();
@@ -143,7 +164,7 @@ public class CentroDeMando {
                 int aux2 = 0;
                 for (OrdenesConstr ord : constrVehi) {
                     if (ord.fase > Juego.fase) {
-                        aux2  += ord.cantidad;
+                        aux2 += ord.cantidad;
                     }
                 }
                 if (aux2 + construccionesVehiculos.size() + cantidad <= 10) {
@@ -247,4 +268,24 @@ public class CentroDeMando {
         }
     }
     
+    public void Mejorar(){
+        int gasto = (int)(0.25*(totaloro + totalcombustible + totalmetal))/3;
+        if(level < 3){
+            if(this.oro >= gasto && this.combustible >= gasto && this.metal >= gasto ){
+                this.oro -= gasto;
+                this.combustible -= gasto;
+                this.metal -= gasto;
+                level += 1;
+                totaloro = (int)(totaloro*(0.10 + (0.20*(level-1))));
+                totalcombustible = (int)(totalcombustible*(0.10 + (0.20*(level-1))));
+                totalmetal = (int)(totalmetal*(0.10 + (0.20*(level-1))));
+            }
+        }
+    }
+    public String getPass(){
+        return this.password;
+    }
+    public String VidaShow() {
+        return vida + "/" + vidatotal;
+    }
 }
