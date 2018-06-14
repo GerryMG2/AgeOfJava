@@ -30,6 +30,18 @@ public class OrdenesConstr {
         this.cantidad = cantidad;
         this.edi = edi;
     }
+    public OrdenesConstr(int fase, int cantidad,TipoEdificacion edi,TipoVehiculo vehiculo) {
+        this.fase = fase;
+        this.cantidad = cantidad;
+        this.edi = edi;
+        this.vehiculo = vehiculo;
+    }
+    public OrdenesConstr(int fase, int cantidad,TipoEdificacion edi,Materiales mat) {
+        this.fase = fase;
+        this.cantidad = cantidad;
+        this.edi = edi;
+        this.mat = mat;
+    }
     public OrdenesConstr(int fase, int cantidad) {
         this.fase = fase;
         this.cantidad = cantidad;

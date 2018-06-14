@@ -43,6 +43,7 @@ public class Milicia {
         this.tiempoEspera = tiempo;
         this.name = name;
         atacando = new int[2];
+        fasetomake = 0;
     }
 
     public Milicia() {

@@ -154,6 +154,9 @@ public class Edificacion {
                 break;
         }
     }
+    public Edificacion returnme(){
+        return this;
+    }
 
     public void getDamage(int ata) {
         vida -= ata;

@@ -172,7 +172,7 @@ public class CentroDeMando {
                         this.oro -= this.costoConstVehi[0] * cantidad;
                         this.combustible -= this.costoConstVehi[1] * cantidad;
                         this.metal -= this.costoConstVehi[2] * cantidad;
-                        constrVehi.add(new OrdenesConstr(Juego.fase + this.costoConstVehi[3], cantidad, tipo));
+                        constrVehi.add(new OrdenesConstr(Juego.fase + this.costoConstVehi[3], cantidad, tipo,TipoVehiculo.liviano));
                     } else {
                         System.out.println("No tiene suficientes recursos");
                     }
@@ -192,7 +192,7 @@ public class CentroDeMando {
                         this.oro -= this.costoConstVehi2[0] * cantidad;
                         this.combustible -= this.costoConstVehi2[1] * cantidad;
                         this.metal -= this.costoConstVehi2[2] * cantidad;
-                        constrVehi2.add(new OrdenesConstr(Juego.fase + this.costoConstVehi2[3], cantidad, tipo));
+                        constrVehi2.add(new OrdenesConstr(Juego.fase + this.costoConstVehi2[3], cantidad, tipo,TipoVehiculo.camion));
                     } else {
                         System.out.println("No tiene suficientes recursos");
                     }
@@ -214,7 +214,7 @@ public class CentroDeMando {
                                 this.oro -= this.costoConsRe1[0] * cantidad;
                                 this.combustible -= this.costoConsRe1[1] * cantidad;
                                 this.metal -= this.costoConsRe1[2] * cantidad;
-                                constrRe1.add(new OrdenesConstr(Juego.fase + this.costoConsRe1[3], cantidad, tipo));
+                                constrRe1.add(new OrdenesConstr(Juego.fase + this.costoConsRe1[3], cantidad, tipo,mat));
                             } else {
                                 System.out.println("No tiene suficientes recursos");
                             }
@@ -234,7 +234,7 @@ public class CentroDeMando {
                                 this.oro -= this.costoConsRe2[0] * cantidad;
                                 this.combustible -= this.costoConsRe2[1] * cantidad;
                                 this.metal -= this.costoConsRe2[2] * cantidad;
-                                constrRe2.add(new OrdenesConstr(Juego.fase + this.costoConsRe2[3], cantidad, tipo));
+                                constrRe2.add(new OrdenesConstr(Juego.fase + this.costoConsRe2[3], cantidad, tipo,mat));
                             } else {
                                 System.out.println("No tiene suficientes recursos");
                             }
@@ -254,7 +254,7 @@ public class CentroDeMando {
                                 this.oro -= this.costoConsRe3[0] * cantidad;
                                 this.combustible -= this.costoConsRe3[1] * cantidad;
                                 this.metal -= this.costoConsRe3[2] * cantidad;
-                                constrRe3.add(new OrdenesConstr(Juego.fase + this.costoConsRe3[3], cantidad, tipo));
+                                constrRe3.add(new OrdenesConstr(Juego.fase + this.costoConsRe3[3], cantidad, tipo,mat));
                             } else {
                                 System.out.println("No tiene suficientes recursos");
                             }
