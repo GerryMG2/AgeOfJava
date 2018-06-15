@@ -17,28 +17,34 @@ public class factory {
             case Constructor:
                 switch (edi) {
                     case Entrenadora:
-                        edif = new Edificacion(100, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
-                        
+                        edif = new Edificacion(100, 50, 50, 2, 200, material, edi, raza, 0, name, tip);
+
                         break;
                     case Recolectora:
-                        edif = new Edificacion(0, 0, 0, 1, 500, material, edi, raza, 50, name, tip);
+                        edif = new Edificacion(0, 0, 0, 1, 150, material, edi, raza, 50, name, tip);
                         edif.faseToMake = Juego.fase + edif.tiempoFabricacion;
                         break;
                     case Vehicular:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 250, material, edi, raza, 0, name, tip);
+                        break;
+                    case Vehicular2:
+                        edif = new Edificacion(50, 50, 50, 2, 300, material, edi, raza, 0, name, tip);
                         break;
                 }
                 break;
             case Tanque:
                 switch (edi) {
                     case Entrenadora:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 300, material, edi, raza, 0, name, tip);
                         break;
                     case Recolectora:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 150, material, edi, raza, 0, name, tip);
                         edif.faseToMake = Juego.fase + edif.tiempoFabricacion;
                         break;
                     case Vehicular:
+                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        break;
+                    case Vehicular2:
                         edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
                         break;
                 }
@@ -46,14 +52,17 @@ public class factory {
             case Atacante:
                 switch (edi) {
                     case Entrenadora:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 150, material, edi, raza, 0, name, tip);
                         break;
                     case Recolectora:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 200, material, edi, raza, 0, name, tip);
                         edif.faseToMake = Juego.fase + edif.tiempoFabricacion;
                         break;
                     case Vehicular:
-                        edif = new Edificacion(50, 50, 50, 2, 500, material, edi, raza, 0, name, tip);
+                        edif = new Edificacion(50, 50, 50, 2, 200, material, edi, raza, 0, name, tip);
+                        break;
+                    case Vehicular2:
+                        edif = new Edificacion(50, 50, 50, 2, 200, material, edi, raza, 0, name, tip);
                         break;
                 }
                 break;
@@ -140,7 +149,7 @@ public class factory {
         //aqui hacer cambios por tipo de raza
         switch (raza) {
             case Constructor:
-                aux = new CentroDeMando(password, 2000, 2000, 2000, 1000, raza);
+                aux = new CentroDeMando(password, 800, 800, 800, 1000, raza);
                 aux.costoConsEntre = new int[4];
                 aux.costoConsEntre[0] = 100;
                 aux.costoConsEntre[1] = 100;
@@ -173,7 +182,7 @@ public class factory {
                 aux.costoConstVehi2[3] = 3;
                 break;
             case Tanque:
-                aux = new CentroDeMando(password, 2000, 2000, 2000, 1000, raza);
+                aux = new CentroDeMando(password, 800, 800, 800, 1000, raza);
                 aux.costoConsEntre = new int[4];
                 aux.costoConsEntre[0] = 100;
                 aux.costoConsEntre[1] = 100;
@@ -206,7 +215,7 @@ public class factory {
                 aux.costoConstVehi2[3] = 3;
                 break;
             case Atacante:
-                aux = new CentroDeMando(password, 2000, 2000, 2000, 1000, raza);
+                aux = new CentroDeMando(password, 800, 800, 800, 1000, raza);
                 aux.costoConsEntre = new int[4];
                 aux.costoConsEntre[0] = 100;
                 aux.costoConsEntre[1] = 100;

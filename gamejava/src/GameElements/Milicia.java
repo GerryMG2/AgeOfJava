@@ -51,12 +51,12 @@ public class Milicia {
     }
 
     public void makeOperations(CentroDeMando cm, Milicia ml) {
-        if (Reader.consola.nextInt(2) == 1) {
+        if (Reader.rn.nextInt(2) == 1) {
             ml.getDamage((int) (this.ataque * 0.8));
             System.out.println("Has hecho " + (int) (this.ataque * 0.8) + " de dannio");
 
         } else {
-            if (Reader.consola.nextInt(2) == 1) {
+            if (Reader.rn.nextInt(2) == 1) {
                 ml.getDamage((int) (this.ataque * 0.9));
                 System.out.println("Has hecho " + (int) (this.ataque * 0.9) + " de dannio");
 
@@ -68,12 +68,12 @@ public class Milicia {
         }
     }
      public void makeOperations(CentroDeMando cm, CentroDeMando ml) {
-        if (Reader.consola.nextInt(2) == 1) {
+        if (Reader.rn.nextInt(2) == 1) {
             ml.getDamage((int) (this.ataque * 0.8));
             System.out.println("Has hecho " + (int) (this.ataque * 0.8) + " de dannio");
 
         } else {
-            if (Reader.consola.nextInt(2) == 1) {
+            if (Reader.rn.nextInt(2) == 1) {
                 ml.getDamage((int) (this.ataque * 0.9));
                 System.out.println("Has hecho " + (int) (this.ataque * 0.9) + " de dannio");
 
@@ -86,12 +86,12 @@ public class Milicia {
     }
 
     public void makeOperations(CentroDeMando cm, Edificacion ml) {
-        if (Reader.consola.nextInt(2) == 1) {
+        if (Reader.rn.nextInt(2) == 1) {
             ml.getDamage((int) (this.ataque * 0.8));
             System.out.println("Has hecho " + (int) (this.ataque * 0.8) + " de dannio");
 
         } else {
-            if (Reader.consola.nextInt(2) == 1) {
+            if (Reader.rn.nextInt(2) == 1) {
                 ml.getDamage((int) (this.ataque * 0.9));
                 System.out.println("Has hecho " + (int) (this.ataque * 0.9) + " de dannio");
             } else {
@@ -104,11 +104,11 @@ public class Milicia {
     }
 
     public void makeOperations(CentroDeMando cm, Vehiculo ml) {
-        if (Reader.consola.nextInt(2) == 1) {
+        if (Reader.rn.nextInt(2) == 1) {
             ml.getDamage((int) (this.ataque * 0.8));
 
         } else {
-            if (Reader.consola.nextInt(2) == 1) {
+            if (Reader.rn.nextInt(2) == 1) {
                 ml.getDamage((int) (this.ataque * 0.9));
 
             } else {

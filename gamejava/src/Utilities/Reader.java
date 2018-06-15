@@ -5,6 +5,7 @@
  */
 package Utilities;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -13,5 +14,6 @@ import java.util.Scanner;
  */
 public class Reader {
      public static final Scanner consola = new Scanner(System.in);
+     public static final Random rn = new Random();
     
 }

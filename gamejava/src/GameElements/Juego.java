@@ -86,16 +86,18 @@ public class Juego {
 
     public void start() {
         fase = 1;
-        while(this.isLive(jugador1) && this.isLive(jugador2)){
+        while (this.isLive(jugador1) && this.isLive(jugador2)) {
+            System.out.println("#####################################################");
+            System.out.println("Es tu turno jugador 1");
             this.Turno(jugador1, jugador2, fase);
+            System.out.println("#####################################################");
+            System.out.println("Es tu turno jugador 2");
             this.Turno(jugador2, jugador1, fase);
             fase++;
         }
-        if(this.isLive(jugador1)){
+        if (this.isLive(jugador1)) {
             System.out.println("Has Ganado jugador 1");
-        }
-        else
-        {
+        } else {
             System.out.println("Has Ganado jugador 2");
         }
 
@@ -111,7 +113,9 @@ public class Juego {
         int opcion;
         opcion = Reader.consola.nextInt();
         while (opcion != 6) {
+            System.out.println("------------------------------------");
             this.subMenu1_1(opcion, cm1, cm2, fase);
+            System.out.println("------------------------------------");
             this.Menu(cm1);
             opcion = Reader.consola.nextInt();
         }
@@ -123,9 +127,14 @@ public class Juego {
             if (ml.fasetomake == fase) {
                 switch (ml.atacando[0]) {
                     case 0:
-                        ml.makeOperations(cm1, cm2);
-                        ml.estado = MiliciaEstado.ataque;
-                        ml.fasetomake = Juego.fase + 1;
+                        if (this.onlyCentre(cm2)) {
+                            ml.makeOperations(cm1, cm2);
+                            ml.estado = MiliciaEstado.ataque;
+                            ml.fasetomake = Juego.fase + 1;
+                        } else {
+                            ml.estado = MiliciaEstado.esperando;
+                        }
+
                         break;
                     case 1:
                         int aux = 0;
@@ -147,7 +156,11 @@ public class Juego {
                         }
                         if (kill) {
                             cm2.construccionesEntrendoras.remove(aux);
+
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -174,6 +187,9 @@ public class Juego {
                         if (kill) {
                             cm2.construccionesVehiculos.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -198,6 +214,9 @@ public class Juego {
                         if (kill) {
                             cm2.construccionesVehiculos2.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -222,6 +241,9 @@ public class Juego {
                         if (kill) {
                             cm2.construccionesRecolectora1.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -246,6 +268,9 @@ public class Juego {
                         if (kill) {
                             cm2.construccionesRecolectora2.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -270,6 +295,9 @@ public class Juego {
                         if (kill) {
                             cm2.construccionesRecolectora3.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -294,6 +322,9 @@ public class Juego {
                         if (kill) {
                             cm2.vehiculos.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -318,6 +349,9 @@ public class Juego {
                         if (kill) {
                             cm2.vehiculos2.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -337,6 +371,9 @@ public class Juego {
                                 if (edi.vida <= 0) {
                                     ml.estado = MiliciaEstado.esperando;
                                     kill = true;
+                                    if (this.onlyCentre(cm2)) {
+                                        cm2.JustCentro = true;
+                                    }
                                 }
 
                                 break;
@@ -346,6 +383,9 @@ public class Juego {
                         if (kill) {
                             cm2.milicias.remove(aux);
                             ml.fasetomake = 0;
+                            if (this.onlyCentre(cm2)) {
+                                cm2.JustCentro = true;
+                            }
                         } else {
                             ml.fasetomake = Juego.fase + 1;
                         }
@@ -366,35 +406,49 @@ public class Juego {
 
     }
 
+    public boolean onlyCentre(CentroDeMando cm) {
+        if (!cm.construccionesEntrendoras.isEmpty() || !cm.construccionesRecolectora1.isEmpty() || !cm.construccionesRecolectora2.isEmpty() || !cm.construccionesRecolectora3.isEmpty() || !cm.construccionesVehiculos.isEmpty() || !cm.construccionesVehiculos2.isEmpty() || !cm.milicias.isEmpty() || !cm.vehiculos.isEmpty() || !cm.vehiculos2.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void VerifyConst(CentroDeMando cm) {
         for (OrdenesConstr or : cm.constrEntre) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         for (OrdenesConstr or : cm.constrVehi) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         for (OrdenesConstr or : cm.constrVehi2) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         for (OrdenesConstr or : cm.constrRe1) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         for (OrdenesConstr or : cm.constrRe2) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         for (OrdenesConstr or : cm.constrRe3) {
             if (Juego.fase == or.fase) {
                 cm.constr(or);
+                cm.JustCentro = false;
             }
         }
         //edificaciones
@@ -403,11 +457,13 @@ public class Juego {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
             }
         }
@@ -417,25 +473,30 @@ public class Juego {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
             }
         }
 
         for (Edificacion edi : cm.construccionesVehiculos2) {
+            System.out.println(edi.name);
             if (edi.tipo != TipoEdificacion.Recolectora) {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
             }
         }
@@ -444,11 +505,13 @@ public class Juego {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
             }
         }
@@ -457,11 +520,13 @@ public class Juego {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
             }
         }
@@ -470,12 +535,27 @@ public class Juego {
                 for (OrdenesConstr or : edi.fase) {
                     if (Juego.fase == or.fase) {
                         edi.makeProcess(or, cm);
+                        cm.JustCentro = false;
                     }
                 }
             } else {
                 if (edi.faseToMake == Juego.fase) {
                     edi.makeProcess(cm);
+                    cm.JustCentro = false;
                 }
+            }
+        }
+
+        for (Vehiculo vehi : cm.vehiculos) {
+            if (vehi.fasetomake == Juego.fase) {
+                vehi.makeOperations(cm);
+                cm.JustCentro = false;
+            }
+        }
+        for (Vehiculo vehi : cm.vehiculos2) {
+            if (vehi.fasetomake == Juego.fase) {
+                vehi.makeOperations(cm);
+                cm.JustCentro = false;
             }
         }
 
@@ -493,7 +573,7 @@ public class Juego {
         System.out.println("Centro De Mando: " + cm.VidaShow());
         cm.getMaterials();
         System.out.println("1.Elementos(Vehiculos, milicias,edificaciones)"
-                + "\n2.Atacar 3.Defender 4.Construir 5.Mejorar 6.Terminar Turno");
+                + " 2.Atacar y Defender 4.Construir 5.Mejorar 6.Terminar Turno");
     }
 
     public void subMenu1_1(int opcion, CentroDeMando cm, CentroDeMando cm2, int fase) {
@@ -561,34 +641,52 @@ public class Juego {
             case 2:
                 System.out.println("Elige una Milicia");
                 this.subMenu2(cm);
-                elec = Reader.consola.nextInt() - 1;
-                System.out.println("1.Entrenadora 2.Edi-Vehiculos-Tipo-Liviano 3.Edi-Vehiculos-Tipo-Camion 4.Edi-Recolectora-1 5.Edi-Recolectora-2 6.Edi-Recolectora-1 ");
+                elec = Reader.consola.nextInt();
+                System.out.println("0.Centro de Mando 1.Entrenadora 2.Edi-Vehiculos-Tipo-Liviano 3.Edi-Vehiculos-Tipo-Camion 4.Edi-Recolectora-1 5.Edi-Recolectora-2 6.Edi-Recolectora-1 ");
                 System.out.println("7.Vehiculos-livianos 8.Vehiculos-Camiones 9.Milicias");
                 int elec2 = Reader.consola.nextInt();
-                this.showForAtack(cm2, elec2);
-                int elec3 = Reader.consola.nextInt();
-                cm.milicias.get(elec).atacando[0] = elec2;
-
-                cm.milicias.get(elec).atacando[1] = this.showForAtack(cm2, elec2, elec3);
-                if (cm.milicias.get(elec).territorio == Territorio.Enemigo && this.showForAtackter(cm2, elec2, elec3) == Territorio.Amigo) {
-                    cm.milicias.get(elec).fasetomake = Juego.fase + 1;
-                } else {
+                System.out.println("si esta vacio ingresa -1");
+                if (elec2 == 0) {
+                    cm.milicias.get(elec).atacando[0] = 0;
                     if (cm.milicias.get(elec).territorio == Territorio.Enemigo) {
-                        if (this.showForAtackter(cm2, elec2, elec3) == Territorio.Enemigo) {
-                            cm.milicias.get(elec).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
-                        }
+                        cm.milicias.get(elec).fasetomake = Juego.fase + 1;
+
                     } else {
-                        if (this.showForAtackter(cm2, elec2, elec3) == Territorio.Amigo) {
-                            cm.milicias.get(elec).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
-                        } else {
-                            cm.milicias.get(elec).fasetomake = Juego.fase + 1;
+                        cm.milicias.get(elec).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
+
+                    }
+                } else {
+                    if (elec2 != -1) {
+                        try {
+                            this.showForAtack(cm2, elec2);
+                            int elec3 = Reader.consola.nextInt();
+                            cm.milicias.get(elec).atacando[0] = elec2;
+
+                            cm.milicias.get(elec).atacando[1] = this.showForAtack(cm2, elec2, elec3);
+                            if (cm.milicias.get(elec).territorio == Territorio.Enemigo && this.showForAtackter(cm2, elec2, elec3) == Territorio.Amigo) {
+                                cm.milicias.get(elec).fasetomake = Juego.fase + 1;
+                            } else {
+                                if (cm.milicias.get(elec).territorio == Territorio.Enemigo) {
+                                    if (this.showForAtackter(cm2, elec2, elec3) == Territorio.Enemigo) {
+                                        cm.milicias.get(elec).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
+                                    }
+                                } else {
+                                    if (this.showForAtackter(cm2, elec2, elec3) == Territorio.Amigo) {
+                                        cm.milicias.get(elec).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
+                                    } else {
+                                        cm.milicias.get(elec).fasetomake = Juego.fase + 1;
+                                    }
+                                }
+                            }
+                            System.out.println("Se ha mandado la orden de atacar");
+                        } catch (Exception unerrorcito) {
                         }
+
                     }
                 }
-                System.out.println("Se ha mandado la orden de atacar");
                 break;
             case 3:
-                this.subMenu3(cm, cm2);
+                this.subMenu3(cm2, cm);
                 System.out.println("A cual desea atacar: ");
                 int defensa = Reader.consola.nextInt();
                 System.out.println("Con que Milicia quieres defender:(Si eliges una que este en territorio enemigo tardara mas)");
@@ -596,12 +694,12 @@ public class Juego {
                 int ataquedefensa = Reader.consola.nextInt();
                 if (cm.milicias.get(ataquedefensa - 1).territorio == Territorio.Amigo) {
                     cm.milicias.get(ataquedefensa - 1).atacando[0] = 9;
-                    cm.milicias.get(ataquedefensa - 1).atacando[1] = this.showForAtack(cm, 9, defensa);
+                    cm.milicias.get(ataquedefensa - 1).atacando[1] = this.showForAtack(cm2, 9, defensa);
                     cm.milicias.get(ataquedefensa - 1).fasetomake = Juego.fase + 1;
                 } else {
                     if (cm.milicias.get(ataquedefensa - 1).territorio == Territorio.Enemigo) {
                         cm.milicias.get(ataquedefensa - 1).atacando[0] = 9;
-                        cm.milicias.get(ataquedefensa - 1).atacando[1] = this.showForAtack(cm, 9, defensa);
+                        cm.milicias.get(ataquedefensa - 1).atacando[1] = this.showForAtack(cm2, 9, defensa);
                         cm.milicias.get(ataquedefensa - 1).fasetomake = Juego.fase + cm.milicias.get(elec).tiempoEspera;
                     }
                 }

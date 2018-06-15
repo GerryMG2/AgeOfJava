@@ -43,7 +43,7 @@ public class Edificacion {
         this.name = name;
     }
 
-    public void makeProcessMoney(CentroDeMando cm, String name, int cant, Materiales mat) {
+    public void makeProcessMoney(CentroDeMando cm, String nameh, int cant, Materiales mat) {
         int aux = 0;
         switch (this.tipo) {
             case Vehicular2:
@@ -54,11 +54,11 @@ public class Edificacion {
                     }
                 }
                 if (cm.vehiculos2.size() + cant + aux <= 10) {
-                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[3]) {
+                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[2]) {
                         cm.oro -= this.costo[0];
                         cm.combustible -= this.costo[1];
                         cm.metal -= this.costo[2];
-                        this.fase.add(new OrdenesConstr( cant,null,TipoVehiculo.camion,mat,Juego.fase + this.tiempoFabricacion,name));
+                        this.fase.add(new OrdenesConstr( cant,null,TipoVehiculo.camion,mat,Juego.fase + this.tiempoFabricacion,nameh));
                     } else {
                         System.out.println("No tienes suficientes recursos");
                     }
@@ -74,11 +74,11 @@ public class Edificacion {
                     }
                 }
                 if (cm.vehiculos.size() + cant + aux <= 10) {
-                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[3]) {
+                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[2]) {
                         cm.oro -= this.costo[0];
                         cm.combustible -= this.costo[1];
                         cm.metal -= this.costo[2];
-                        this.fase.add(new OrdenesConstr(cant,null,TipoVehiculo.liviano,mat,Juego.fase + this.tiempoFabricacion,name));
+                        this.fase.add(new OrdenesConstr(cant,null,TipoVehiculo.liviano,mat,Juego.fase + this.tiempoFabricacion,nameh));
                     } else {
                         System.out.println("No tienes suficientes recursos");
                     }
@@ -94,11 +94,11 @@ public class Edificacion {
                     }
                 }
                 if (cm.milicias.size() + cant + aux <= 10) {
-                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[3]) {
+                    if (cm.oro >= this.costo[0] && cm.combustible >= this.costo[1] && cm.metal >= this.costo[2]) {
                         cm.oro -= this.costo[0];
                         cm.combustible -= this.costo[1];
                         cm.metal -= this.costo[2];
-                        this.fase.add(new OrdenesConstr(Juego.fase + this.tiempoFabricacion, cant));
+                        this.fase.add(new OrdenesConstr(Juego.fase + this.tiempoFabricacion, cant,nameh));
                     } else {
                         System.out.println("No tienes suficientes recursos");
                     }
@@ -150,7 +150,7 @@ public class Edificacion {
                 cm.vehiculos.add(factory.ConstruirVehiculo(raza, orden.vehiculo, orden.mat, orden.name));
                 break;
                 case Entrenadora:
-                cm.milicias.add(factory.Entrenar(raza, name));
+                cm.milicias.add(factory.Entrenar(raza, orden.name));
                 break;
         }
     }
